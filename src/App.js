@@ -1,43 +1,211 @@
 import React, { useState } from 'react';
 import "./App.css";
+import bg from "./Pix/bg.png"
+import CryptoJS from 'crypto-js';
+import { sha3_224 } from 'js-sha3';
+import { sha3_256 } from 'js-sha3';
+import { base32ToText } from "./DataFormat/FromBase32";
+import { base45ToText } from "./DataFormat/FromBase45";
+import { base58ToText } from './DataFormat/FromBase58';
+import { base62ToText } from "./DataFormat/FromBase62";
+import { base64ToText } from "./DataFormat/FromBase64";
+import { base85ToText } from './DataFormat/FromBase85';
+import { bcdToText } from './DataFormat/FromBCD';
+import { binaryToText } from "./DataFormat/FromBinary"
+import { charcodeToText } from "./DataFormat/FromCharcode"
+import { decimalToText } from "./DataFormat/FromDecimal"
+import { hexToText } from "./DataFormat/FromHex"
+import { hexdumpToText } from "./DataFormat/FromHexdump"
+import { htmlEntityToText } from "./DataFormat/FromHTMLentity"
+import { octalToText } from "./DataFormat/FromOctal"
+import { textToBase32 } from './DataFormat/ToBase32';
+import { textToBase45 } from "./DataFormat/ToBase45"
+import { textToBase58 } from "./DataFormat/ToBase58"
+import { textToBase62 } from "./DataFormat/ToBase62";
+import { textToBase64 } from "./DataFormat/ToBase64"
+import { textToBase85 } from './DataFormat/ToBase85';
+import { decimalToBcd } from "./DataFormat/ToBCD"
+import { textToBinary } from "./DataFormat/ToBinary"
+import { textToCharcode } from "./DataFormat/ToCharcode"
+import { textToDecimal } from "./DataFormat/ToDecimal"
+import { textToHex } from "./DataFormat/ToHex"
+import { textToHexDump } from "./DataFormat/ToHexdump"
+import { textToHtmlEntity } from "./DataFormat/ToHTMLentity"
+import { textToOctal } from "./DataFormat/ToOctal"
+import { urlDecode } from "./DataFormat/URLdecode"
+import { urlEncode } from "./DataFormat/URLencode"
+import { baconCipherDecode } from "./Encryption/bacondecode"
+import { baconCipherEncode } from './Encryption/baconencode';
+import { vigenereDecode } from "./Encryption/vigeneredecode"
+import { vigenereEncode} from "./Encryption/vigenereencode"
+import { rot13Encrypt } from './Encryption/rot13';
+import { rot47Encrypt } from './Encryption/rot47';
+import { caesarBoxEncrypt } from './Encryption/caesarbox';
+import { xorBinaryStrings } from './Encryption/xor'
+
 function App() {
   const [conversionType, setConversionType] = useState('');
   const [inputText, setInputText] = useState('');
-
-  const handleConversionClick = (type) => {
-    setConversionType(type);
-    setInputText('');
-  };
 
   const handleInputChange = (e) => {
     setInputText(e.target.value);
     handleConversion(e.target.value);
   };
 
+  const handleConversionClick = (type) => {
+    setConversionType(type);
+    setInputText('');
+  };
+
+  const [selectedOption, setSelectedOption] = useState(null);
+  const handleItemClick = (option) => {
+    setSelectedOption(option);
+  };
+
   const handleConversion = (text) => {
     let convertedText = '';
 
     switch (conversionType) {
-      case 'toHex':
-        convertedText = textToHex(inputText);
-        break;
-      case 'fromHex':
-        convertedText = hexToText(inputText);
-        break;
-      case 'toBase32':
-        convertedText = textToBase32(inputText);
-        break;
       case 'fromBase32':
         convertedText = base32ToText(inputText);
         break;
-      case 'toBase64':
-        convertedText = textToBase64(inputText);
+      case 'fromBase45':
+        convertedText = base45ToText(inputText);
+        break;
+      case 'fromBase58':
+        convertedText = base58ToText(inputText);
+        break;
+      case 'fromBase62':
+        convertedText = base62ToText(inputText);
         break;
       case 'fromBase64':
         convertedText = base64ToText(inputText);
         break;
+      case 'fromBase85':
+        convertedText = base85ToText(inputText);
+        break;
+      case 'frombcd':
+        convertedText = bcdToText(inputText);
+        break;
+      case 'fromBinary':
+        convertedText = binaryToText(inputText);
+        break;
+      case 'fromCharcode':
+        convertedText = charcodeToText(inputText);
+        break;
+      case 'fromDecimal':
+        convertedText = decimalToText(inputText);
+        break;
+      case 'fromHex':
+        convertedText = hexToText(inputText);
+        break;
+      case 'fromHexdump':
+        convertedText = hexdumpToText(inputText);
+        break;
+      case 'fromHtmlentity':
+        convertedText = htmlEntityToText(inputText);
+        break;
+      case 'fromOctal':
+        convertedText = octalToText(inputText);
+        break;
+      case 'toBase32':
+        convertedText = textToBase32(inputText);
+        break;
+      case 'toBase45':
+        convertedText = textToBase45(inputText);
+        break;
+      case 'toBase58':
+        convertedText = textToBase58(inputText);
+        break;
+      case 'toBase62':
+        convertedText = textToBase62(inputText);
+        break;
+      case 'toBase64':
+        convertedText = textToBase64(inputText);
+        break;
+      case 'toBase64':
+        convertedText = textToBase64(inputText);
+        break;
+      case 'toBase85':
+        convertedText = textToBase85(inputText);
+        break;
+      case 'tobcd':
+        convertedText = decimalToBcd(inputText);
+        break;
+      case 'toBinary':
+        convertedText = textToBinary(inputText);
+        break;
+      case 'toCharcode':
+        convertedText = textToCharcode(inputText);
+        break;
+      case 'toDecimal':
+        convertedText = textToDecimal(inputText);
+        break;
+      case 'toHex':
+        convertedText = textToHex(inputText);
+        break;
       case 'toHexDump':
         convertedText = textToHexDump(inputText);
+        break;
+      case 'toHtmlentity':
+        convertedText = textToHtmlEntity(inputText);
+        break;
+      case 'toOctal':
+        convertedText = textToOctal(inputText);
+        break;
+      case 'urlDecode':
+        convertedText = urlDecode(inputText);
+        break;
+      case 'urlEncode':
+        convertedText = urlEncode(inputText);
+        break;
+      case 'bacondecode':
+        convertedText = baconCipherDecode(inputText);
+        break;
+      case 'baconencode':
+        convertedText = baconCipherEncode(inputText);
+        break;
+      case 'caesarboc':
+        convertedText = caesarBoxEncrypt(inputText);
+        break;
+      case 'rot13':
+        convertedText = rot13Encrypt(inputText);
+        break;
+      case 'rot47':
+        convertedText = rot47Encrypt(inputText);
+        break;
+      case 'vigeneredecode':
+        convertedText = vigenereDecode(inputText);
+        break;
+      case 'vigenereencode':
+        convertedText = vigenereEncode(inputText);
+        break;
+      case 'xor':
+        convertedText = xorBinaryStrings(inputText);
+        break;
+      case 'keccak224':
+        convertedText = keccak224hash(inputText);
+        break;
+      case 'keccak256':
+        convertedText = keccak256hash(inputText);
+        break;
+      case 'md2':
+        convertedText = Md2Hash(inputText);
+        break;
+      case 'md4':
+        convertedText = Md4Hash(inputText);
+        break;
+      case 'md5':
+        convertedText = Md5Hash(inputText);
+        break;
+      case 'sha1':
+        convertedText = sha1Hash(inputText);
+        break;
+      case 'sha224':
+        convertedText = sha224Hash(inputText);
+        break;
+      case 'sha256':
+        convertedText = sha256Hash(inputText);;
         break;
       default:
         break;
@@ -45,170 +213,112 @@ function App() {
 
     return convertedText;
   };
-
-  const textToHex = (text) => {
-    let hex = '';
-    for (let i = 0; i < text.length; i++) {
-      hex += text.charCodeAt(i).toString(16);
-    }
-    return hex;
-  };
-
-  const hexToText = (hex) => {
-    let text = '';
-    for (let i = 0; i < hex.length; i += 2) {
-      const byte = parseInt(hex.substr(i, 2), 16);
-      text += String.fromCharCode(byte);
-    }
-    return text;
-  };
-
-  const textToBase32 = (text) => {
-    const base32Charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
-    let binaryString = '';
-    let padding = '';
   
-    for (let i = 0; i < text.length; i++) {
-      const charCode = text.charCodeAt(i).toString(2);
-      binaryString += '0'.repeat(8 - charCode.length) + charCode;
-    }
-
-    const remainder = binaryString.length % 5;
-    if (remainder !== 0) {
-      padding = '0'.repeat(5 - remainder);
-      binaryString += padding;
-    }
-
-    let base32Text = '';
-    for (let i = 0; i < binaryString.length; i += 5) {
-      const group = binaryString.substr(i, 5);
-      const index = parseInt(group, 2);
-      base32Text += base32Charset[index];
-    }
-
-    base32Text += '='.repeat(padding.length / 5);
-    return base32Text;
+  const keccak224hash = () => {
+    const result = sha3_224(inputText);
+    return result;
   };
 
-
-  const base32ToText = (base32) => {
-    const base32Charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
-    let binaryString = '';
-    let paddingCount = 0;
-
-    base32 = base32.replace(/=/g, '');
-
-    for (let i = 0; i < base32.length; i++) {
-      const index = base32Charset.indexOf(base32[i]);
-      const binary = index.toString(2).padStart(5, '0');
-      binaryString += binary;
-    }
-
-    const lastChar = binaryString[binaryString.length - 1];
-    if (lastChar === '0') {
-      while (binaryString[binaryString.length - 1] === '0') {
-        binaryString = binaryString.slice(0, -1);
-        paddingCount++;
-      }
-    }
-
-    let text = '';
-    for (let i = 0; i < binaryString.length; i += 8) {
-      const byte = binaryString.substr(i, 8);
-      const charCode = parseInt(byte, 2);
-      text += String.fromCharCode(charCode);
-    }
-
-    text += '='.repeat(paddingCount);
-
-    return text;
+  const keccak256hash = () => {
+    const result = sha3_256(inputText);
+    return result;
   };
 
-
-  const textToBase64 = (text) => {
-    const base64Charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-    let encodedText = '';
-
-    let binaryString = '';
-    for (let i = 0; i < text.length; i++) {
-      const charCode = text.charCodeAt(i).toString(2);
-      binaryString += '0'.repeat(8 - charCode.length) + charCode;
-    }
-
-    const padding = binaryString.length % 6 === 2 ? '==' : binaryString.length % 6 === 4 ? '=' : '';
-    binaryString += '0'.repeat(6 - binaryString.length % 6);
-    for (let i = 0; i < binaryString.length; i += 6) {
-      const group = binaryString.substr(i, 6);
-      const index = parseInt(group, 2);
-      encodedText += base64Charset[index];
-    }
-
-    encodedText += padding;
-
-    return encodedText;
+  const Md2Hash = () =>  {
+    const result = CryptoJS.MD2(inputText).toString();
+    return result;
   };
 
-
-  const base64ToText = (base64) => {
-    const base64Charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-    let decodedText = '';
-
-    base64 = base64.replace(/[^A-Za-z0-9+/=]/g, '');
-
-    let binaryString = '';
-    for (let i = 0; i < base64.length; i++) {
-      const char = base64[i];
-      const index = base64Charset.indexOf(char);
-      if (index !== -1) {
-        const binary = index.toString(2).padStart(6, '0');
-        binaryString += binary;
-      }
-    }
-
-    for (let i = 0; i < binaryString.length; i += 8) {
-      const byte = binaryString.substr(i, 8);
-      const charCode = parseInt(byte, 2);
-      decodedText += String.fromCharCode(charCode);
-    }
-
-    return decodedText;
+  const Md4Hash = () =>  {
+    const result = CryptoJS.MD4(inputText).toString();
+    return result;
+  };
+  
+  const Md5Hash = () =>  {
+    const result = CryptoJS.MD5(inputText).toString();
+    return result;
   };
 
-
-  const textToHexDump = (text) => {
-    let hexDump = '';
-    for (let i = 0; i < text.length; i++) {
-      const byte = text.charCodeAt(i).toString(16);
-      hexDump += ('0' + byte).slice(-2) + ' ';
-    }
-    return hexDump.trim();
+  const sha1Hash = () =>  {
+    const result = CryptoJS.SHA1(inputText).toString();
+    return result;
   };
+
+  const sha224Hash = () =>  {
+    const result = CryptoJS.SHA224(inputText).toString();
+    return result;
+  };
+
+  const sha256Hash = () =>  {
+    const result = CryptoJS.SHA256(inputText).toString();
+    return result;
+  };
+  
 
   return (
+    <>
     <div className="body">
       <div className="topbar"><h1>CyberChef Clone</h1></div>
       <div className="container">
-      <div className="sidebar">
-        <h2>Conversions</h2>
+      <div className="sidebar1">
+        <h3>Data Format</h3>
         <ul classNeme="SidebarList">
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromHex')}>From Hex</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toHex')}>To Hex</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromHex')}>From Hex</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toHexDump')}>To HexDump</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromHexdump')}>From HexDump</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toBase32')}>To Base32</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromBase32')}>From Base32</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toBase45')}> To Base45 </li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromBase45')}>From Base45</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toBase58')}>To Base58</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromBase58')}>From Base58</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toBase62')}>To Base62</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('frombase62')}>From base62</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toBase64')}>To Base64</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromBase64')}>From Base64</li>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toHexDump')}>To HexDump</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toBase85')}>To Base85</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('frombase85')}>From Base85</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('tobcd')}>To BCD</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('frombcd')}>From BCD</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toBinary')}>To Binary</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromBinary')}>From Binary</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toCharcode')}>To Charcode</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromCharcode')}>From Charcode</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toDecimal')}>To Decimal</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromDecimal')}>From Decimal</li>
         </ul>
-        <h2>Hashing</h2>
-        <ul className="sidebarList">
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromHex')}>MD5</li>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toHex')}>SHA-1</li>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toBase32')}>SHA-256</li>
+      </div>
+      <div className='sidebar2'>
+        <ul className='sidebarLisy'>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toHtmlEntity')}>To HTML Entity</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromHtmlEntity')}>From HTML Entity</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toOctal')}>To Octal</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromOctal')}>From Octal</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('urlEncode')}>URL Encode</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('urlDecode')}>Url Decode</li>
         </ul>
-        <h2>Decryption</h2>
+        <h3>Encryption</h3>
         <ul className="sidebarList">
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromHex')}>AES</li>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toHex')}>RSA</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('rot13')}>ROT13</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('rot47')}>ROT47</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('caesarbox')}>Caesar Box Cipher</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('xor')}>XOR</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('vigenereencode')}>Vigenere Encode</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('vigeneredecode')}>Vigenere Decode</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('baconencode')}>Bacon Cipher Encode</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('bacondecode')}>Bacon Cipher Decode</li>
+        </ul>
+        <h3>Hashing</h3>
+        <ul className="sidebarList">
+        <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('md2')}>MD2</li>
+        <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('md4')}>MD4</li>
+        <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('md5')}>MD5</li>
+        <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('sha1')}>SHA-1</li>
+        <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('sha224')}>SHA-224</li>
+        <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('sha256')}>SHA-256</li>
+        <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('keccak224')}>Keccak-224</li>
+        <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('keccak256')}>Keccak-256</li>
         </ul>
       </div>
       <div className="content">
@@ -216,15 +326,17 @@ function App() {
         <div className="input-container">
           <input type="text" className="input-field" value={inputText} placeholder="Enter here" onChange={handleInputChange} />
         </div>
-        <h3>Output:</h3>
-        <div className="output-container">
-          <textarea className="output-field" value={handleConversion(inputText)} readOnly />
+        <div className='out'>
+          <h3>Output:</h3>
+          <div className="output-container">
+            <textarea className="output-field" value={handleConversion(inputText)} readOnly />
+          </div>
         </div>
-        
       </div>
       </div>
     </div>
+    </>
   );
-}
+};
 
 export default App;
