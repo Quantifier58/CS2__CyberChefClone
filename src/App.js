@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./App.css";
-import bg from "./Pix/bg.png"
+import md2 from 'js-md2';
+import md5 from 'js-md5';
 import CryptoJS from 'crypto-js';
 import { sha3_224 } from 'js-sha3';
 import { sha3_256 } from 'js-sha3';
@@ -36,12 +37,10 @@ import { urlDecode } from "./DataFormat/URLdecode"
 import { urlEncode } from "./DataFormat/URLencode"
 import { baconCipherDecode } from "./Encryption/bacondecode"
 import { baconCipherEncode } from './Encryption/baconencode';
-import { vigenereDecode } from "./Encryption/vigeneredecode"
-import { vigenereEncode} from "./Encryption/vigenereencode"
 import { rot13Encrypt } from './Encryption/rot13';
 import { rot47Encrypt } from './Encryption/rot47';
-import { caesarBoxEncrypt } from './Encryption/caesarbox';
-import { xorBinaryStrings } from './Encryption/xor'
+import { toMorseCode } from './Encryption/tomorsecode';
+import { fromMorseCode } from './Encryption/frommorsecode';
 
 function App() {
   const [conversionType, setConversionType] = useState('');
@@ -55,11 +54,6 @@ function App() {
   const handleConversionClick = (type) => {
     setConversionType(type);
     setInputText('');
-  };
-
-  const [selectedOption, setSelectedOption] = useState(null);
-  const handleItemClick = (option) => {
-    setSelectedOption(option);
   };
 
   const handleConversion = (text) => {
@@ -123,9 +117,6 @@ function App() {
       case 'toBase64':
         convertedText = textToBase64(inputText);
         break;
-      case 'toBase64':
-        convertedText = textToBase64(inputText);
-        break;
       case 'toBase85':
         convertedText = textToBase85(inputText);
         break;
@@ -165,23 +156,17 @@ function App() {
       case 'baconencode':
         convertedText = baconCipherEncode(inputText);
         break;
-      case 'caesarboc':
-        convertedText = caesarBoxEncrypt(inputText);
-        break;
       case 'rot13':
         convertedText = rot13Encrypt(inputText);
         break;
       case 'rot47':
         convertedText = rot47Encrypt(inputText);
         break;
-      case 'vigeneredecode':
-        convertedText = vigenereDecode(inputText);
+      case 'toMorseCode':
+        convertedText = toMorseCode(inputText);
         break;
-      case 'vigenereencode':
-        convertedText = vigenereEncode(inputText);
-        break;
-      case 'xor':
-        convertedText = xorBinaryStrings(inputText);
+      case 'fromMorseCode':
+        convertedText = fromMorseCode(inputText);
         break;
       case 'keccak224':
         convertedText = keccak224hash(inputText);
@@ -191,9 +176,6 @@ function App() {
         break;
       case 'md2':
         convertedText = Md2Hash(inputText);
-        break;
-      case 'md4':
-        convertedText = Md4Hash(inputText);
         break;
       case 'md5':
         convertedText = Md5Hash(inputText);
@@ -225,17 +207,12 @@ function App() {
   };
 
   const Md2Hash = () =>  {
-    const result = CryptoJS.MD2(inputText).toString();
-    return result;
-  };
-
-  const Md4Hash = () =>  {
-    const result = CryptoJS.MD4(inputText).toString();
+    const result = md2(inputText).toString();
     return result;
   };
   
   const Md5Hash = () =>  {
-    const result = CryptoJS.MD5(inputText).toString();
+    const result = md5(inputText).toString();
     return result;
   };
 
@@ -285,14 +262,13 @@ function App() {
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromBinary')}>From Binary</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toCharcode')}>To Charcode</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromCharcode')}>From Charcode</li>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toDecimal')}>To Decimal</li>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromDecimal')}>From Decimal</li>
         </ul>
       </div>
       <div className='sidebar2'>
-        <ul className='sidebarLisy'>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toHtmlEntity')}>To HTML Entity</li>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromHtmlEntity')}>From HTML Entity</li>
+        <ul className='sidebarList'>
+          <p><br/></p>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toDecimal')}>To Decimal</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromDecimal')}>From Decimal</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toOctal')}>To Octal</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromOctal')}>From Octal</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('urlEncode')}>URL Encode</li>
@@ -302,17 +278,14 @@ function App() {
         <ul className="sidebarList">
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('rot13')}>ROT13</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('rot47')}>ROT47</li>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('caesarbox')}>Caesar Box Cipher</li>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('xor')}>XOR</li>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('vigenereencode')}>Vigenere Encode</li>
-          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('vigeneredecode')}>Vigenere Decode</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('toMorseCode')}>To Morse Code</li>
+          <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('fromMorseCode')}>From Morse Code</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('baconencode')}>Bacon Cipher Encode</li>
           <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('bacondecode')}>Bacon Cipher Decode</li>
         </ul>
         <h3>Hashing</h3>
         <ul className="sidebarList">
         <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('md2')}>MD2</li>
-        <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('md4')}>MD4</li>
         <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('md5')}>MD5</li>
         <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('sha1')}>SHA-1</li>
         <li style={{cursor: 'pointer'}} onClick={() => handleConversionClick('sha224')}>SHA-224</li>
