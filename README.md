@@ -54,10 +54,10 @@
 <div align="center">
 
 ### Dark Theme
-![Dark Theme](https://via.placeholder.com/800x400/0f0f23/00ff41?text=Dark+Theme+Preview)
+![Dark Theme](libs\public\dark.png)
 
 ### Light Theme
-![Light Theme](https://via.placeholder.com/800x400/f8fafc/2563eb?text=Light+Theme+Preview)
+![Light Theme](libs\public\light.png)
 
 </div>
 
