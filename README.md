@@ -54,10 +54,10 @@
 <div align="center">
 
 ### Dark Theme
-![Dark Theme](libs\public\dark.png)
+![Dark Theme](libs/public/dark.png)
 
 ### Light Theme
-![Light Theme](libs\public\light.png)
+![Light Theme](libs/public/light.png)
 
 </div>
 
