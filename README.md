@@ -57,7 +57,7 @@
 ![Dark Theme](src\assets\dark.png)
 
 ### Light Theme
-![Light Theme](lsrc\assets\light.png)
+![Light Theme](src\assets\light.png)
 
 </div>
 
