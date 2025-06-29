@@ -73,12 +73,12 @@
 
 Clone the repository
 ```bash
-git clone https://github.com/yourusername/text-converter-crypto-tools.git
+git clone https://github.com/Quantifier58/CS2__CyberChefClone.git
 ```
 
 Navigate to project directory
 ```bash
-cd text-converter-crypto-tools
+cd DaemonByte
 ```
 
 Install dependencies
