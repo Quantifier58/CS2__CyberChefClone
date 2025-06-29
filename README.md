@@ -54,10 +54,10 @@
 <div align="center">
 
 ### Dark Theme
-![Dark Theme](src\assets\dark.png)
+![Dark Theme](/src/assets/dark.png)
 
 ### Light Theme
-![Light Theme](src\assets\light.png)
+![Light Theme](/src/assets/light.png)
 
 </div>
 
