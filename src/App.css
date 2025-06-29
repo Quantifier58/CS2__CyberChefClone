@@ -1,3 +1,40 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+:root {
+  /* Dark Theme Variables */
+  --bg-primary: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  --bg-secondary: rgba(15, 15, 35, 0.8);
+  --bg-tertiary: rgba(255, 255, 255, 0.05);
+  --text-primary: #e8e8e8;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-accent: #00ff41;
+  --border-color: rgba(0, 255, 65, 0.2);
+  --border-hover: rgba(0, 255, 65, 0.4);
+  --accent-color: #00ff41;
+  --accent-secondary: #00e0ff;
+  --input-bg: rgba(0, 0, 0, 0.3);
+  --card-bg: rgba(0, 0, 0, 0.2);
+  --hover-bg: rgba(0, 255, 65, 0.1);
+}
+
+[data-theme="light"] {
+  /* Light Theme Variables */
+  --bg-primary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+  --bg-secondary: rgba(248, 250, 252, 0.9);
+  --bg-tertiary: rgba(0, 0, 0, 0.02);
+  --text-primary: #1e293b;
+  --text-secondary: rgba(30, 41, 59, 0.8);
+  --text-accent: #2563eb;
+  --border-color: rgba(37, 99, 235, 0.2);
+  --border-hover: rgba(37, 99, 235, 0.4);
+  --accent-color: #2563eb;
+  --accent-secondary: #0ea5e9;
+  --input-bg: rgba(255, 255, 255, 0.8);
+  --card-bg: rgba(255, 255, 255, 0.6);
+  --hover-bg: rgba(37, 99, 235, 0.1);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,20 +42,23 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: all 0.3s ease;
+  background: var(--bg-primary);
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-  color: white;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .main-content {
@@ -31,7 +71,28 @@ body {
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-tertiary);
+  backdrop-filter: blur(10px);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Light theme content area */
+[data-theme="light"] .content-area {
+  background: rgb(161 171 181 / 90%);
+  color: #1e293b;
+  backdrop-filter: none;
+}
+
+/* Ensure text areas and other elements inside content-area adapt to light theme */
+[data-theme="light"] textarea {
+  background: rgba(255, 255, 255, 0.8);
+  color: #1e293b;
+  border: 1px solid rgba(30, 41, 59, 0.3);
+  transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
+[data-theme="light"] .conversion-panel {
+  color: #1e293b;
 }
 
 .content-area::-webkit-scrollbar {
@@ -39,14 +100,81 @@ body {
 }
 
 .content-area::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.content-area::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--border-color);
   border-radius: 4px;
 }
 
+.content-area::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+  opacity: 0.6;
+}
+
+.content-area::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}
+
+/* Font Styles */
+
+/* Header font - classic serif font */
+.header, .app-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* Sidebar font - elegant sans-serif font */
+.sidebar, .sidebar-header, .tool-category, .tool-item, .category-title {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 500;
+}
+
+.sidebar-header h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Main window font - clean readable sans-serif font */
+.content-area, .conversion-panel, p, div, .welcome-message {
+  font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* Monospace font for code/technical content */
+textarea, .input-field, .output-field, .preloader-subtitle {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Feature cards specific styling */
+.feature-card h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+}
+
+.feature-card p {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+/* Tool info styling */
+.tool-description {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Navigation links */
+.nav-link {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .main-content {
     flex-direction: column;
@@ -54,5 +182,24 @@ body {
   
   .content-area {
     padding: 1rem;
+  }
+
+  .header, .app-title {
+    font-size: 1.4rem;
+  }
+  
+  .sidebar {
+    font-size: 0.9rem;
+  }
+  
+  .content-area {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 1.2rem;
+    letter-spacing: -0.3px;
   }
 }

@@ -12,7 +12,7 @@ const ToolCategory = ({ title, tools, onToolSelect, selectedTool }) => {
       >
         <h3 className="category-title">{title}</h3>
         <span className={`expand-icon ${isExpanded ? 'expanded' : ''}`}>
-          ▼
+          
         </span>
       </div>
       {isExpanded && (

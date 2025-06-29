@@ -68,14 +68,37 @@ const Sidebar = ({ onToolSelect, selectedTool }) => {
         { id: 'toMorseCode', name: 'To Morse Code' },
         { id: 'fromMorseCode', name: 'From Morse Code' },
       ]
+    },
+    {
+      title: 'CTF Specialized',
+      tools: [
+        { id: 'caesarEncrypt', name: 'Caesar Encrypt' },
+        { id: 'caesarDecrypt', name: 'Caesar Decrypt' },
+        { id: 'toBase64URLSafe', name: 'To Base64 URL-Safe' },
+        { id: 'fromBase64URLSafe', name: 'From Base64 URL-Safe' },
+        { id: 'atbash', name: 'Atbash Cipher' },
+        { id: 'vigenereEncrypt', name: 'Vigenère Encrypt' },
+        { id: 'vigenereDecrypt', name: 'Vigenère Decrypt' },
+        { id: 'reverseText', name: 'Reverse Text' },
+        { id: 'reverseWords', name: 'Reverse Words' },
+        { id: 'toLeetspeak', name: 'To Leetspeak' },
+        { id: 'fromLeetspeak', name: 'From Leetspeak' },
+        { id: 'toNATO', name: 'To NATO Phonetic' },
+        { id: 'fromNATO', name: 'From NATO Phonetic' },
+        { id: 'keyboardShiftRight', name: 'Keyboard Shift Right' },
+        { id: 'keyboardShiftLeft', name: 'Keyboard Shift Left' },
+        { id: 'toPigLatin', name: 'To Pig Latin' },
+        { id: 'fromPigLatin', name: 'From Pig Latin' },
+        { id: 'toQRText', name: 'QR Code Info' },
+        { id: 'fromQRText', name: 'From QR Code' }
+      ]
     }
+
   ];
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-header">
-        <h2>Conversion Tools</h2>
-      </div>
+      {/* Removed sidebar-header section completely */}
       <div className="sidebar-content">
         {toolCategories.map((category, index) => (
           <ToolCategory

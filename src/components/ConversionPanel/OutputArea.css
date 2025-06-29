@@ -43,3 +43,34 @@
   resize: none;
   outline: none;
 }
+
+/* Light theme support for output area */
+[data-theme="light"] .section-header h3 {
+  color: #1e293b;
+}
+
+[data-theme="light"] .char-count {
+  color: rgba(30, 41, 59, 0.7);
+}
+
+[data-theme="light"] .copy-btn {
+  background: rgba(37, 99, 235, 0.2);
+  color: #1e293b;
+  border: 1px solid rgba(37, 99, 235, 0.4);
+}
+
+[data-theme="light"] .copy-btn:hover:not(:disabled) {
+  background: rgba(37, 99, 235, 0.3);
+}
+
+[data-theme="light"] .copy-btn.success {
+  background: rgba(37, 99, 235, 0.4);
+  border-color: rgba(37, 99, 235, 0.6);
+}
+
+[data-theme="light"] .output-field {
+  background: #d4d4d7 !important;
+  border: 1px solid rgba(30, 41, 59, 0.1);
+  color: #1e293b;
+}
+

@@ -69,3 +69,38 @@
 .input-field::placeholder {
   color: rgba(255, 255, 255, 0.5);
 }
+
+/* Light theme support for input area */
+[data-theme="light"] .section-header h3 {
+  color: #1e293b;
+}
+
+[data-theme="light"] .char-count {
+  color: rgba(30, 41, 59, 0.7);
+}
+
+[data-theme="light"] .clear-btn {
+  background: rgba(30, 41, 59, 0.1);
+  color: #1e293b;
+  border: 1px solid rgba(30, 41, 59, 0.2);
+}
+
+[data-theme="light"] .clear-btn:hover {
+  background: rgba(30, 41, 59, 0.2);
+}
+
+[data-theme="light"] .input-field {
+  background: #d4d4d7;
+  border: 1px solid rgba(30, 41, 59, 0.2);
+  color: #1e293b;
+}
+
+[data-theme="light"] .input-field:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+[data-theme="light"] .input-field::placeholder {
+  color: rgba(30, 41, 59, 0.5);
+}
+

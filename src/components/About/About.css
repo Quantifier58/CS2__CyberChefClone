@@ -39,3 +39,27 @@
   margin-bottom: 0.5rem;
   color: rgba(255, 255, 255, 0.8);
 }
+
+/* Light theme support for about page */
+[data-theme="light"] .about-content {
+  background:  #b9bbc1 !important;
+  border: 1px solid rgba(30, 41, 59, 0.1);
+  color: #1e293b;
+}
+
+[data-theme="light"] .about-content h1 {
+  color: var(--accent-color);
+}
+
+[data-theme="light"] .about-content h2 {
+  color: #475569;
+}
+
+[data-theme="light"] .about-content p {
+  color: rgba(30, 41, 59, 0.9);
+}
+
+[data-theme="light"] .about-content li {
+  color: rgba(30, 41, 59, 0.8);
+}
+

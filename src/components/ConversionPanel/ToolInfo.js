@@ -52,6 +52,26 @@ const ToolInfo = ({ toolId }) => {
     'bacondecode': 'Decode Bacon\'s cipher back to original text',
     'toMorseCode': 'Convert text to Morse code representation',
     'fromMorseCode': 'Convert Morse code back to text',
+    // CTF Specialized
+    'caesarEncrypt': 'Encrypt text using Caesar cipher with 3-character shift',
+    'caesarDecrypt': 'Decrypt text using Caesar cipher with 3-character shift',
+    'toBase64URLSafe': 'Encode text to URL-safe Base64 format (no padding)',
+    'fromBase64URLSafe': 'Decode URL-safe Base64 encoded text',
+    'atbash': 'Apply Atbash cipher (A=Z, B=Y, etc.)',
+    'vigenereEncrypt': 'Encrypt text using Vigenère cipher with key "KEY"',
+    'vigenereDecrypt': 'Decrypt text using Vigenère cipher with key "KEY"',
+    'reverseText': 'Reverse the entire text string',
+    'reverseWords': 'Reverse the order of words in text',
+    'toLeetspeak': 'Convert text to 1337 speak (A=4, E=3, etc.)',
+    'fromLeetspeak': 'Convert leetspeak back to normal text',
+    'toNATO': 'Convert text to NATO phonetic alphabet',
+    'fromNATO': 'Convert NATO phonetic alphabet back to text',
+    'keyboardShiftRight': 'Shift each key one position right on QWERTY keyboard',
+    'keyboardShiftLeft': 'Shift each key one position left on QWERTY keyboard',
+    'toPigLatin': 'Convert text to Pig Latin',
+    'fromPigLatin': 'Convert Pig Latin back to normal text',
+    'toQRText': 'Display QR code information and metadata',
+
   };
 
   const description = toolDescriptions[toolId] || 'Select a tool from the sidebar to see its description and start converting your text.';

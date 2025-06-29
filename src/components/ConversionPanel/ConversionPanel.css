@@ -69,6 +69,39 @@
   gap: 2rem;
 }
 
+/* Light theme support for conversion panel */
+[data-theme="light"] .welcome-message h2 {
+  background: linear-gradient(45deg, #1e293b, #475569);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .welcome-message p {
+  color: rgba(30, 41, 59, 0.8);
+}
+
+[data-theme="light"] .feature-card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(30, 41, 59, 0.1);
+  color: #1e293b;
+}
+
+[data-theme="light"] .feature-card h3 {
+  color: var(--accent-color);
+}
+
+[data-theme="light"] .feature-card p {
+  color: rgba(30, 41, 59, 0.7);
+}
+
+[data-theme="light"] .tool-description {
+  background: rgba(255, 255, 255, 0.6);
+  color: rgba(30, 41, 59, 0.8);
+  border-left: 3px solid var(--accent-color);
+}
+
+
 @media (max-width: 768px) {
   .conversion-area {
     flex-direction: column;

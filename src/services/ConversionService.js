@@ -41,6 +41,17 @@ import { frommorsecode } from '../utils/conversions/encryption/frommorsecode';
 import { rot13 } from '../utils/conversions/encryption/rot13';
 import { rot47 } from '../utils/conversions/encryption/rot47';
 import { tomorsecode } from '../utils/conversions/encryption/tomorsecode';
+import { caesarEncrypt, caesarDecrypt } from '../utils/conversions/encryption/caesar';
+import { ToBase64URLSafe, FromBase64URLSafe } from '../utils/conversions/dataformat/Base64URLSafe';
+import { atbashCipher } from '../utils/conversions/encryption/atbash';
+import { vigenereEncrypt, vigenereDecrypt } from '../utils/conversions/encryption/vigenere';
+import { reverseText, reverseWords } from '../utils/conversions/dataformat/Reverse';
+import { toLeetspeak, fromLeetspeak } from '../utils/conversions/encryption/leetspeak';
+import { toNATO, fromNATO } from '../utils/conversions/encryption/nato';
+import { toQRText } from '../utils/conversions/dataformat/QRCode';
+import { keyboardShiftRight, keyboardShiftLeft } from '../utils/conversions/encryption/keyboardshift';
+import { toPigLatin, fromPigLatin } from '../utils/conversions/encryption/piglatin';
+import { fromQRText } from '../utils/conversions/dataformat/FromORCode';
 
 export class ConversionService {
   static async convert(type, inputText) {
@@ -141,6 +152,44 @@ export class ConversionService {
           return CryptoJS.SHA256(inputText).toString();
         case 'keccak256':
           return keccak256(inputText);
+        case 'caesarEncrypt':
+          return caesarEncrypt(inputText, 3);
+        case 'caesarDecrypt':
+          return caesarDecrypt(inputText, 3);
+        case 'toBase64URLSafe':
+          return ToBase64URLSafe(inputText);
+        case 'fromBase64URLSafe':
+          return FromBase64URLSafe(inputText);
+        case 'atbash':
+          return atbashCipher(inputText);
+        case 'vigenereEncrypt':
+          return vigenereEncrypt(inputText, 'KEY');
+        case 'vigenereDecrypt':
+          return vigenereDecrypt(inputText, 'KEY');
+        case 'reverseText':
+          return reverseText(inputText);
+        case 'reverseWords':
+          return reverseWords(inputText);
+        case 'toLeetspeak':
+          return toLeetspeak(inputText);
+        case 'fromLeetspeak':
+          return fromLeetspeak(inputText);
+        case 'toNATO':
+          return toNATO(inputText);
+        case 'fromNATO':
+          return fromNATO(inputText);
+        case 'toQRText':
+          return toQRText(inputText);
+         case 'fromQRText':
+          return fromQRText(inputText);
+        case 'keyboardShiftRight':
+          return keyboardShiftRight(inputText);
+        case 'keyboardShiftLeft':
+          return keyboardShiftLeft(inputText);
+        case 'toPigLatin':
+          return toPigLatin(inputText);
+        case 'fromPigLatin':
+          return fromPigLatin(inputText);
           
         default:
           throw new Error(`Unknown conversion type: ${type}`);

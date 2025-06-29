@@ -14,3 +14,7 @@
   border-radius: 6px;
   border-left: 3px solid #4CAF50;
 }
+
+[data-theme="light"] .tool-description {
+  background-color: #d4d4d7 !important;
+}
